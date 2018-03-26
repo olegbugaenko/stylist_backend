@@ -44,27 +44,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($services as $service_data) 
         {
-
             $service = App\Service::create($service_data);
-        
-            if($service->id)
-            {
-                for($ui = 1; $ui <=26; $ui++)
-                {
-                    if(rand(1,10) == 1)
-                    {
-                        $user = User::find($ui);
-                    
-                        if($user)
-                        {
-                            $user->services()->attach($service->id,[
-                                'price'=>rand(100,1000),
-                                'duration'=>rand(1,5)*5
-                            ]);
-                        }
-                    }
-                }
-            }
         }
 
         //for($iu = 12)

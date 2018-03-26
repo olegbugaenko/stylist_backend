@@ -36,15 +36,15 @@ class VerifyJWTAuth
         
         } catch (TokenExpiredException $e) {
 
-            return response()->json(['token_expired'], 200);
+            return response()->json(['error'=>'token_expired'], 200);
 
         } catch (TokenInvalidException $e) {
 
-            return response()->json(['token_invalid'], 200);
+            return response()->json(['error'=>'token_invalid'], 200);
 
         } catch (JWTException $e) {
 
-            return response()->json(['token_absent'], 200);
+            return response()->json(['error'=>'token_absent'], 200);
 
         }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSalonsTable extends Migration
+class CreateSalonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,11 +21,6 @@ class AddSalonsTable extends Migration
             });
         }
 
-        Schema::table('users', function($table)
-        {
-            $table->dropColumn('salon_name');
-            $table->dropColumn('salon_address');
-        });
     }
 
     /**
@@ -35,13 +30,10 @@ class AddSalonsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('salons');
-    
-        Schema::table('users', function($table)
+        if(Schema::hasTable('salons'))
         {
-            $table->char('salon_name',20);
-            $table->char('salon_address',20);
-        });
+            Schema::drop('salons');
+        }
     }
 
 }

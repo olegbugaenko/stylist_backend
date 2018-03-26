@@ -31,8 +31,14 @@ class User extends Authenticatable
         return $this->hasOne('App\Salon','user_id');
     }
 
+    //Store some data to pivot table in order to decrease server load while select queries
     public function services()
     {
         return $this->belongsToMany('App\Service')->withPivot('price','duration');
+    }
+
+    public function availabilities()
+    {
+        return $this->hasMany('App\UserAvailability');
     }
 }

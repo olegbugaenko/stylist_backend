@@ -36,7 +36,7 @@ class Services extends Controller
 
 			$services = $user->find($user_id)->load('services');
 
-			return response()->json($services);
+			return response()->json($services->toArray());
 		}
 		else
 		{
@@ -107,6 +107,26 @@ class Services extends Controller
 	    });
 
 	    return response()->json($available_services);
+	}
+
+	public function getCurrentUserStep(Request $request)
+	{
+		$user = new User;
+
+		$current_user = $user->find($request->input('user_id'));
+
+	    $service = new Service;
+
+	    $user_services = $current_user->services()->get();
+
+	    if($user_services->isEmpty())
+	    {
+	    	return response()->json(['status'=>'guide','step'=>'1']);
+	    }
+	    else
+	    {
+	    	return response()->json(['status'=>'guide','step'=>'2']);
+	    }
 	}
 
 }

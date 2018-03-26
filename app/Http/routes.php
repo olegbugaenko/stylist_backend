@@ -33,10 +33,15 @@ Route::group(['namespace' => 'Api','middleware' => ['jwt_auth']], function()
 
     Route::get('my-services', 'Services@myServices');
 
+    Route::get('my-guide', 'Services@getCurrentUserStep');
+
 	Route::get('available-services', 'Services@availableServices');
 
     Route::post('update_userservice', 'Services@saveService');
 
+    Route::get('availability', 'UserAvailability@getAvailability');
+
+    Route::post('update_availability', 'UserAvailability@setAvailability');
 
 
 });
