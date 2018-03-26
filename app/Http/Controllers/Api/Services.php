@@ -125,7 +125,16 @@ class Services extends Controller
 	    }
 	    else
 	    {
-	    	return response()->json(['status'=>'guide','step'=>'2']);
+	    	$user_avails = $current_user->availabilities()->get();
+	    	if($user_avails->isEmpty())
+	    	{
+	    		return response()->json(['status'=>'guide','step'=>'2']);	
+	    	}
+	    	else
+	    	{
+	    		return response()->json(['status'=>'guide','step'=>'3']);
+	    	}
+	    	
 	    }
 	}
 
